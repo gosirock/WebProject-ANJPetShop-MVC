@@ -1,11 +1,16 @@
 package com.javalec.homeController;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.javalec.command.ACommand;
+import com.javalec.command.o_searchUserInfoCommand;
 
 /**
  * Servlet implementation class SemiFrrontController
@@ -41,17 +46,25 @@ public class HomeController extends HttpServlet {
 	}
 
 	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("actionDo");
-		request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 		
 		String viewPage = null;
-		
+		ACommand command = null;
 		
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		
-		System.out.println(uri);
-		System.out.println(conPath);
+		String com = uri.substring(conPath.length());
+		switch(com) {
+		case("/o_searchUserInfo.do"):
+			command = new o_searchUserInfoCommand();
+			command.execute(request, response);
+			viewPage = "o_searchUserInfo.jsp";
+			break;
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+		dispatcher.forward(request, response);
 	}
 	
 	
