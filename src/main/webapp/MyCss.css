@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+
+
+header {
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+h1 {
+  color: #333;
+  font-size: 24px;
+}
+
+nav ul {
+  list-style: none;
+  margin-right: 60px;
+  padding: 0;
+  display: flex; /* display를 flex로 설정 */
+  justify-content: center;
+}
+
+nav li {
+  display: inline;
+  margin-right: 60px;
+  display: flex; /* display를 flex로 설정 */
+  justify-content: center;
+}
+
+nav li a {
+  text-decoration: none;
+  color: #333;
+}
