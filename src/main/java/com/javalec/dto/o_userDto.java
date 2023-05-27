@@ -1,5 +1,6 @@
 package com.javalec.dto;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class o_userDto {
@@ -10,15 +11,15 @@ public class o_userDto {
 	String usertel;
 	String useremail;
 	String useraddress;
-	Timestamp insertdate;
-	Timestamp deletedate;
+	Date insertdate;
+	Date deletedate;
 	
 	public o_userDto() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public o_userDto(String userid, String username, String usertel, String useremail, String useraddress,
-			Timestamp insertdate, Timestamp deletedate) {
+			Date insertdate, Date deletedate) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -69,19 +70,19 @@ public class o_userDto {
 		this.useraddress = useraddress;
 	}
 
-	public Timestamp getInsertdate() {
+	public Date getInsertdate() {
 		return insertdate;
 	}
 
-	public void setInsertdate(Timestamp insertdate) {
+	public void setInsertdate(Date insertdate) {
 		this.insertdate = insertdate;
 	}
 
-	public Timestamp getDeletedate() {
+	public Date getDeletedate() {
 		return deletedate;
 	}
 
-	public void setDeletedate(Timestamp deletedate) {
+	public void setDeletedate(Date deletedate) {
 		this.deletedate = deletedate;
 	}
 
