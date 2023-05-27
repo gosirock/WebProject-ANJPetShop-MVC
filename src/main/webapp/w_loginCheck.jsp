@@ -10,19 +10,19 @@
 	
 	<%	
 		// result 값이 null 이거나 true/false
-		Object result = request.getAttribute("idCheck");
+		Object result = request.getAttribute("RESULT");
 		String userId =(String)request.getAttribute("userId");
 	%>
 
 
 
 <%if(result==null){ %>
-	<form action="/member/idCheck.do" method="get">
+	<form action="idCheck.bo" method="get">
 		<input type="text" name="userId" placeholder="중복 체크할 ID를 입력하세요">
 		<input type="submit" value="중복 체크">
 	</form>
 <%}else{ %>
-	<form action="/member/idCheck.do" method="get">
+	<form action="idCheck.bo" method="get">
 		<input type="text" name="userId" value="<%=userId %>" placeholder="중복 체크할 ID를 입력하세요">
 		<input type="submit" value="중복 체크">
 	</form>
