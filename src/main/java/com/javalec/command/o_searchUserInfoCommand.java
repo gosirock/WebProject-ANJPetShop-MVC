@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javalec.dao.o_userDao;
+import com.javalec.dao.o_adminDao;
 import com.javalec.dto.o_userDto;
 
 public class o_searchUserInfoCommand implements ACommand {
@@ -16,7 +16,7 @@ public class o_searchUserInfoCommand implements ACommand {
 		String queryName = request.getParameter("query");
 		String queryContent = request.getParameter("content");
 		
-		o_userDao dao = new o_userDao();
+		o_adminDao dao = new o_adminDao();
 		ArrayList<o_userDto> dtos = dao.searchUserInfo(queryName, queryContent);
 		request.setAttribute("userlist", dtos);
 	}
