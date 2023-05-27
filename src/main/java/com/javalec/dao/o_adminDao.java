@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.javalec.dto.o_adminDto;
+import com.javalec.dto.o_orderDto;
 import com.javalec.dto.o_userDto;
 
 public class o_adminDao {
@@ -114,6 +115,48 @@ public class o_adminDao {
 		}
 		return dto;
 		
-	} // 
+	} // searchAdminInfo
+	
+	public ArrayList<o_orderDto> searchOrders(){
+		ArrayList<o_orderDto> dtos = new ArrayList<>();
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from orders";
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			
+			while(resultSet.next()) {
+				int ordernum = resultSet.getInt(1);
+				String userid = resultSet.getString(2);
+				String pid = resultSet.getString(3);
+				int count = resultSet.getInt(4);
+				int price = resultSet.getInt(5);
+				Timestamp orderdate = resultSet.getTimestamp(6);
+				
+				o_orderDto dto = new o_orderDto(ordernum, userid, pid, count, price, orderdate);
+				dtos.add(dto);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				// 생성한 순서의 역순대로 닫아준다! -> 퍼포먼스가 좋아짐.
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+		
+	} // SearchUserInfo
 	
 } // End

@@ -1,23 +1,24 @@
 package com.javalec.command;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javalec.dao.o_adminDao;
 import com.javalec.dto.o_adminDto;
-import com.mysql.cj.Session;
+import com.javalec.dto.o_orderDto;
 
-public class o_adminInfoCommand implements ACommand {
+public class o_salesCommand implements ACommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		o_adminDao dao = new o_adminDao();
-		String adminid = request.getParameter("adminid");
 		
-		o_adminDto dto = dao.searchAdminInfo(adminid);
+		ArrayList<o_orderDto> dtos = dao.searchOrders();
 		
-		request.setAttribute("admin_info", dto);
+		request.setAttribute("orders", dtos);
 
 	}
 
