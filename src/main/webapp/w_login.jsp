@@ -8,7 +8,7 @@
 <title>로그인창</title>
 </head>
 <link rel="stylesheet" href="w_loginCenter.css">
-
+<link rel="stylesheet" href="w_btn.css">
 <body>
 	<h1>로그인</h1>
 	<hr>

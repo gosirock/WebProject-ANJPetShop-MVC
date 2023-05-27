@@ -110,11 +110,6 @@
 		form.address.select()
 		return
 	}
-	if(!regExpAddress.test(address)){
-		alert("주소 입력을 확인해 주세요.")
-		form.address.select()
-		return
-	}
 	
 	alert("회원가입이 완료 되었습니다.")
 	form.submit()

@@ -30,14 +30,16 @@ public class W_Dao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		System.out.println(result);
+	
 		try {
 			connection = dataSource.getConnection();
 			String query = "select count(userid) as id from user where userid = ?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			resultSet = preparedStatement.executeQuery();
-		
+			if(resultSet.next()) {
+				result = resultSet.getString("id");
+			}
 			
 			return result;
 			
@@ -105,7 +107,6 @@ public class W_Dao {
 			
 			if(resultSet.next()) {
 				result = resultSet.getString("type");
-				System.out.println(result+"다오");
 			}
 			
 		} catch (Exception e) {

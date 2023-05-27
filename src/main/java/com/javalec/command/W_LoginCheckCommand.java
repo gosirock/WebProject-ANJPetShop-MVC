@@ -21,7 +21,7 @@ public class W_LoginCheckCommand implements ACommand {
 		W_Dao dao = new W_Dao();
 		String result = dao.loginChack(id, pw);
 		
-		System.out.println(result);
+		System.out.println("로그인?");
 		
 		response.setContentType("text/plain; charset=utf-8");
 		try {
