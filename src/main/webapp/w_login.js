@@ -1,11 +1,11 @@
 $("#id").keyup(function() {
 		let oId = $("#id").val();
-		
+		let pw = $("#pw").val();
 		$.ajax({
 			url:"loginCheck.do",
 			type:"post",
 			dataType:"text",
-			data:{"id":oId},
+			data:{"id":oId,"pw":pw},
 			success:function(data){
 				
 			

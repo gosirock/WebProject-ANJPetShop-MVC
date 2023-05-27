@@ -37,9 +37,7 @@ public class W_Dao {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
-				result = resultSet.getString("id");
-			}
+		
 			
 			return result;
 			
@@ -59,40 +57,7 @@ public class W_Dao {
 	
 	}
 
-	public String loginChack(String id, String pw) {
-		String result = "";
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = dataSource.getConnection();
-			String query = "select count(*) from admin where adminid = ? and adminpasswd";
-			String query1 = "select userid from user where userid = ? and userpasswd";
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, id);
-			preparedStatement.setString(2, pw);
-			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
-				result = resultSet.getString("conunt(*)");
-				result.equals(1);
-			return result;
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return result;
-		}finally {
-			try {
-				if(resultSet != null) resultSet.close();
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 	
-		return result;
-	}
 	public void join(String id, String pw, String name, String tel, String email, String address) {
 		
 		Connection connection = null;
@@ -122,7 +87,41 @@ public class W_Dao {
 	
 	}
 
-
+	public String loginChack(String id, String pw) {
+		String result = "";
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+		
+			connection = dataSource.getConnection();
+			String query = "SELECT 'admin' AS type FROM admin WHERE adminid = ? AND adminpasswd = ? UNION ALL SELECT 'user' AS type FROM user WHERE userid = ? AND userpasswd = ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, id);
+			preparedStatement.setString(2, pw);
+			preparedStatement.setString(3, id);
+			preparedStatement.setString(4, pw);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				result = resultSet.getString("type");
+				System.out.println(result+"다오");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+		return result;
+	}
 
 
 
