@@ -9,7 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.javalec.dto.T_Dto;
+import com.javalec.dto.T_productDto;
 
 public class T_Dao {
 	
@@ -25,8 +25,9 @@ public class T_Dao {
 		}
 	}
 	
-	public ArrayList<T_Dto> list() {
-	    ArrayList<T_Dto> dtos = new ArrayList<T_Dto>();
+	// 장바구니에 담긴 상품 보여주기
+	public ArrayList<T_productDto> list() {
+	    ArrayList<T_productDto> dtos = new ArrayList<T_productDto>();
 	    Connection connection = null;
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
@@ -34,7 +35,7 @@ public class T_Dao {
 
 	    try {
 	        connection = dataSource.getConnection();
-	        String sql = "SELECT c.count, c.userid, c.pid, p.pname, p.psize, p.pcolor, p.pprice " +
+	        String sql = "SELECT c.seq, c.count, c.userid, c.pid, p.pname, p.psize, p.pcolor, p.pprice " +
 	                     "FROM user u, cart c, product p " +
 	                     "WHERE u.userid = c.userid AND p.pid = c.pid"; //AND u.userid = '" + userid + "'";
 	        preparedStatement = connection.prepareStatement(sql);
@@ -47,10 +48,11 @@ public class T_Dao {
 	            int psize = resultSet.getInt("psize");
 	            String pcolor = resultSet.getString("pcolor");
 	            int pprice = resultSet.getInt("pprice");
+	            int count = resultSet.getInt("count");
 	            //int pstock = resultSet.getInt("pstock");
 	           // String pimage = resultSet.getString("pimage");
 
-	            T_Dto dto = new T_Dto(pid, pname, psize, pcolor, pprice);
+	            T_productDto dto = new T_productDto(pid, pname, psize, pcolor, pprice, count);
 	            dtos.add(dto);
 	        }
 	    } catch (Exception e) {
@@ -69,6 +71,61 @@ public class T_Dao {
 	    }
 	    return dtos;
 	}
+	
+	// 장바구니에서 수량변경
+	public void update(String pid, int count) {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    try {
+	        connection = dataSource.getConnection();
+	        String query = "update cart set count = ? where pid = ?";
+	        preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setInt(1, count);
+	        preparedStatement.setString(2, pid);
+
+	        preparedStatement.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (preparedStatement != null)
+	                preparedStatement.close();
+	            if (connection != null)
+	                connection.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
+	// 장바구니에서 삭제
+	public void delete(int seq) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = dataSource.getConnection();
+			String query = "delete from cart where seq = ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, seq);
+			preparedStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 
 
 }

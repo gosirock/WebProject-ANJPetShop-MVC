@@ -1,8 +1,9 @@
 package com.javalec.dto;
 
-public class T_Dto {
+public class T_productDto {
 	
 	// Field
+	int seq;
 	int count;
 	String pid;
 	String pname;
@@ -11,23 +12,39 @@ public class T_Dto {
 	int pprice;
 	int pstock;
 	String pimage;
+
 	
 	// Construct
-	public T_Dto() {
+	public T_productDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public T_Dto(String pid, String pname, int psize, String pcolor, int pprice) {
+	public T_productDto(String pid, String pname, int psize, String pcolor, int pprice, int count) {
 		super();
 		this.pid = pid;
 		this.pname = pname;
 		this.psize = psize;
 		this.pcolor = pcolor;
 		this.pprice = pprice;
+		this.count = count;
 //		this.pstock = pstock;
 //		this.pimage = pimage;
 	}
+	
+	public T_productDto(int seq) {
+		super();
+		this.seq = seq;
+	}
+	
 
+	public int getSeq() {
+		return seq;
+	}
+	
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+	
 	public String getPid() {
 		return pid;
 	}
@@ -67,6 +84,14 @@ public class T_Dto {
 	public void setPprice(int pprice) {
 		this.pprice = pprice;
 	}
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 //	public int getPstock() {
 //		return pstock;
@@ -76,13 +101,13 @@ public class T_Dto {
 //		this.pstock = pstock;
 //	}
 //
-//	public String getPimage() {
-//		return pimage;
-//	}
-//
-//	public void setPimage(String pimage) {
-//		this.pimage = pimage;
-//	}
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
 	
 	
 
