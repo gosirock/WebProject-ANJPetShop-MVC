@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import com.javalec.dto.o_adminDto;
 import com.javalec.dto.o_orderDto;
+import com.javalec.dto.o_productDto;
 import com.javalec.dto.o_userDto;
 
 public class o_adminDao {
@@ -297,5 +298,121 @@ public class o_adminDao {
 		return monthSales;
 	} // 매출 조회
 
+	public ArrayList<o_productDto> searchInventory(String queryName, String queryContent){
+
+		ArrayList<o_productDto> dtos = new ArrayList<>();
+		o_productDto dto = null;
+		
+		if(queryName == null){ // 첫 화면인 경우
+			queryName = "pid";
+			queryContent = "";
+		}
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from product";
+			String where = " where " + queryName + " like '%" + queryContent + "%';";
+			preparedStatement = connection.prepareStatement(query + where);
+			resultSet = preparedStatement.executeQuery();
+			
+			
+			while(resultSet.next()) {
+				String pid = resultSet.getString(1);
+				String pname = resultSet.getString(2);
+				int psize = resultSet.getInt(3);
+				String pcolor = resultSet.getString(4);
+				int pprice = resultSet.getInt(5);
+				int pstock = resultSet.getInt(6);
+				String pimage = resultSet.getString(7);
+				
+				dto = new o_productDto(pid, pname, psize, pcolor, pprice, pstock, pimage);
+				dtos.add(dto);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				// 생성한 순서의 역순대로 닫아준다! -> 퍼포먼스가 좋아짐.
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+		
+	} // searchInventory
+	
+	public void stockChange(String pid, int pprice, int pstock, String pimage) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "update product set pprice = ?, pstock = ?, pimage = ? where pid = ?";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setInt(1, pprice);
+			preparedStatement.setInt(2, pstock);
+			preparedStatement.setString(3, pimage);
+			preparedStatement.setString(4, pid);
+
+			preparedStatement.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				// 생성한 순서의 역순대로 닫아준다! -> 퍼포먼스가 좋아짐.
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	} // stockChange
+	
+	public int productInsert(String pid, String pname, int psize, String pcolor, int pprice, int pstock, String pimage) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		int result = 1;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into product (pid, pname, psize, pcolor, pprice, pstock, pimage) values (?,?,?,?,?,?,?)";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, pid);
+			preparedStatement.setString(2, pname);
+			preparedStatement.setInt(3, psize);
+			preparedStatement.setString(4, pcolor);
+			preparedStatement.setInt(5, pprice);
+			preparedStatement.setInt(6, pstock);
+			preparedStatement.setString(7, pimage);
+			
+			preparedStatement.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+			result--;
+		}finally {
+			try {
+				// 생성한 순서의 역순대로 닫아준다! -> 퍼포먼스가 좋아짐.
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	} // productInsert
 	
 } // End
