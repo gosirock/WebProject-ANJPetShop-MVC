@@ -8,6 +8,7 @@
 <title>회원가입</title>
 </head>
 <link rel="stylesheet" href="w_divCenter.css">
+<link rel="stylesheet" href="w_btn2.css">
 <style>
 .back {
   width: 300px;
@@ -15,7 +16,7 @@
   border-radius: 10px;
   font-size:14px;
 }
-.check {
+.check { 
   display: block;
   text-align: right;
   height:20px;
@@ -23,40 +24,38 @@
 }
 </style>
 <body>
-<h1>회원가입</h1>
-	<hr>
 	<div class="logo_box">
 			<h2 style="font-family:굴림;font-size:50px"> 회원가입</h2>
 		<form action="join.do" method="get" name="join">
 		
 			<span id="idwrite" style="font-size: 15px"></span><br/>
-				<input type="text" name="id" id="id" class="back" placeholder="아이디" ><br/>
+				<input type="text" name="id" id="id" class="back" placeholder=" 아이디" ><br/>
 			<span id="idCheckConfirm" class = "check">  </span>
 			
 			<span id="pwwrite" style="font-size: 15px"></span><br/>
-				<input type="password" id = "pw1"class="back" name="passwd"  placeholder="비밀 번호"><br/>
+				<input type="password" id = "pw1"class="back" name="passwd"  placeholder=" 비밀 번호"><br/>
 				<span id="pwCheck" class = "check" >  </span>
 			<span id="pw2write" style="font-size: 15px"></span><br/>
-				<input type="password" id="pw2" class="back" name="passwd2"  placeholder="비밀 번호 확인"><br/>
+				<input type="password" id="pw2" class="back" name="passwd2"  placeholder=" 비밀 번호 확인"><br/>
 			<span id="pwCheckConfirm" class = "check" ></span>
 		
 			<span id="namewrite" style="font-size: 15px"></span><br/>
-				<input type="text" name="name" id="name" class="back" placeholder="이 름"><br/><br/>
+				<input type="text" name="name" id="name" class="back" placeholder=" 이 름"><br/><br/>
 			
 			<span id="telwrite" style="font-size: 15px"></span><br/>
-				<input type="text" name="tel" id="tel" class="back" placeholder="전화번호"><br/><br/>
+				<input type="text" name="tel" id="tel" class="back" placeholder=" 전화번호"><br/><br/>
 			
 			<span id="emailwrite" style="font-size: 15px"></span><br/>
-				<input type="text" name="email" id="email" class="back" placeholder="이메일"><br/><br/>
+				<input type="text" name="email" id="email" class="back" placeholder=" 이메일"><br/><br/>
 			<span id="addresswrite" style="font-size: 15px"></span>
-			<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" style="float:right;border-radius: 0.5em"><br/>
-				<input type="text" name="address" id="address" class="back" placeholder="주 소"><br/><br/>
-				<input type="button" value="가입" onclick="checkjoin()" style="background: black;width: 310px;height: 50px;font-size: 20px;color: white" >
+			<input type="button" class="btn-2" onclick="sample6_execDaumPostcode()" value="주소 찾기" style="float:right;border-radius: 0.5em; cursor: pointer"><br/>
+				<input type="text" name="address" id="address" class="back" placeholder=" 주 소"><br/><br/>
+				<button class="btn" onclick="checkjoin()"><span> 가입하기 </span></button>
 		</form>
 </div>
 </body>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="w_join.js" ></script> 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
