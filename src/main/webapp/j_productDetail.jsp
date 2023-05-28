@@ -9,9 +9,9 @@
 <title>BTY SHOE MARKET</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
 <style>
-    .  .container {
+   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row\;
   }
 
   .column {
@@ -42,7 +42,18 @@
   
 
  </style>
-<script>
+
+</head>
+<body>
+<%
+	/* 제품 페이지에서 사용자가 선택한 제품의 제품번호 받아오기 */
+	String pid = request.getParameter("pid");
+	session.setAttribute("PRODUCTID", pid);
+%>
+	<header>
+		로고 카테고리 로그인 마이페이지 
+	</header>
+    <script>
 	var selectedColor = ''; // 옵션 - 선택된 색상을 저장하는 변수
 	var selectedSizes = []; // 옵션 - 선택된 사이즈들을 저장하는 배열
 
@@ -104,59 +115,49 @@
 	}
       
       /* 사이즈 선택시 수행될 작업 */
-      function handleSizeButtonClick(button) {
-		  var selectedSize = button.value;
-		  document.getElementById('selectedSize').textContent = selectedSize; // 선택한 사이즈 업데이트
-		
-		  if (selectedSizes.includes(selectedSize)) {
-		    return;
-		  }
-		  selectedSizes.push(selectedSize);
-		
-		  var selectedSizeElement = document.querySelector('.product-info-size');
-		  selectedSizeElement.textContent = selectedSize; // 선택한 사이즈 업데이트
-		
-		  var productInfo = document.getElementById('productInfo');
-		  productInfo.style.display = 'flex';
-		  productInfo.querySelector('.product-info-size').textContent = selectedSize; // 선택한 사이즈 업데이트
-		
-		  var newSelection = document.createElement('div');
-		  newSelection.classList.add('product-info');
-		  newSelection.innerHTML = `
-		    ${content_view.pname }&nbsp;&nbsp;   		
-		    ${content_view.pcolor }&nbsp;&nbsp; 		<!-- 선택한 색상 -->
-		    <span class="product-info-size">${selectedSize}</span>&nbsp;&nbsp;			<!-- 선택한 사이즈 -->  
-		    <input type="button" onclick="decreaseQuantity()" value="-">
-		    <input type="text" size="3" id="quantity" value="1" min="0" onchange="updateQuantity(this.value)" oninput="calcPrice(this.value)" style="text-align: center;">
-		    <input type="button" onclick="increaseQuantity()" value="+">
-		    &nbsp;&nbsp;
-		    <span id="result">${content_view.pprice }</span>
-		    <button onclick="resetSelection()">X</button>
-		  `;
-		
-		  var productInfoContainer = document.getElementById('productInfoContainer');
-		  productInfoContainer.appendChild(newSelection);
-		
-		  // Calculate and display the updated price
-		  calcPrice();
-		}
+	 function handleSizeButtonClick(button) {
+	    var selectedSize = button.value;
+	    document.getElementById('selectedSize').textContent = selectedSize; // 선택한 사이즈 업데이트
+	
+	    if (selectedSizes.includes(selectedSize)) {
+	        return;
+	    }
+	    selectedSizes.push(selectedSize);
+	
+	    var selectedSizeElement = document.getElementById('selectedSize');
+	    selectedSizeElement.textContent = selectedSize; // 선택한 사이즈 업데이트
+	
+	    var productInfo = document.getElementById('productInfo');
+	    productInfo.style.display = 'flex';
+	    productInfo.querySelector('.product-info-size').textContent = selectedSize; // 선택한 사이즈 업데이트
+	
+	    var newSelection = document.createElement('div');
+	    newSelection.classList.add('product-info');
+	    newSelection.innerHTML = `
+	        ${content_view.pname }&nbsp;&nbsp;   		
+	        ${content_view.pcolor }&nbsp;&nbsp; 		<!-- 선택한 색상 -->
+	        <span class="product-info-size">${selectedSize}</span>&nbsp;&nbsp;			<!-- 선택한 사이즈 -->  
+	        <input type="button" onclick="decreaseQuantity()" value="-">
+	        <input type="text" size="3" id="quantity" value="1" min="0" onchange="updateQuantity(this.value)" oninput="calcPrice(this.value)" style="text-align: center;">
+	        <input type="button" onclick="increaseQuantity()" value="+">
+	        &nbsp;&nbsp;
+	        <span id="result">${content_view.pprice }</span>
+	        <button onclick="resetSelection()">X</button>
+	    `;
+	
+	    var productInfoContainer = document.getElementById('productInfoContainer');
+	    productInfoContainer.innerHTML = ""; // 기존 선택한 옵션들 초기화
+	    productInfoContainer.appendChild(newSelection);
+	
+	    // Calculate and display the updated price
+	    calcPrice();
+	}
       
 
       
       
       
-  </script>
-</head>
-<body>
-<%
-	/* 제품 페이지에서 사용자가 선택한 제품의 제품번호 받아오기 */
-	String pid = request.getParameter("pid");
-	session.setAttribute("PRODUCTID", pid);
-%>
-	<header>
-		로고 카테고리 로그인 마이페이지 
-	</header>
-    <!-- 메인 컨텐츠 -->
+  </script><!-- 메인 컨텐츠 -->
     <main class="main">
     	<div class="container">
     		<div class="column">
@@ -168,16 +169,15 @@
 		        <div class="product-details">
 		            <h1>${content_view.pname }</h1>
 		            <fmt:formatNumber value="${content_view.pprice }" pattern="#,###" /> 원 <br/><br/>
-					<form action="같은 제품의 다른 색상 페이지" method="get">								
 			        	색상 <br/>
 			        	${content_view.pcolor }
 			        	<br/><br/>
 			        	사이즈 <br/>
-			        	<c:forEach items="${selectSize }" var="psize" >
-			        		<input type="button" name="size" value="${psize.psize }" onclick="handleSizeButtonClick(this)">&nbsp;&nbsp;
-			        	</c:forEach>
+		        		<input type="button" name="size" value="230" onclick="handleSizeButtonClick(this)">&nbsp;&nbsp;
+		        		<input type="button" name="size" value="240" onclick="handleSizeButtonClick(this)">&nbsp;&nbsp;
+		        		<input type="button" name="size" value="260" onclick="handleSizeButtonClick(this)">&nbsp;&nbsp;
+		        		<input type="button" name="size" value="270" onclick="handleSizeButtonClick(this)">&nbsp;&nbsp;
 			        	<br/><br/><hr><br/>
-		        	</form>
 		        	
 		        	<!-- 사용자가 선택한 부분 보여주기 -->
 		        	<div class="product-info" id="productInfo" style="display: none;">
@@ -192,6 +192,29 @@
 							<span id="result">${content_view.pprice }</span>
 							<button onclick="resetSelection()">X</button>
 						</form>
+		        		<form action="<!-- 장바구니 및 결제 페이지로 넘겨주기  -->" method="get">
+							${content_view.pname }&nbsp;&nbsp;   		
+							${content_view.pcolor }&nbsp;&nbsp; 		<!-- 선택한 색상 -->
+							<span id="selectedSize2"></span>&nbsp;&nbsp;			<!-- 선택한 사이즈 -->  
+							<input type="button" onclick="decreaseQuantity()" value="-">
+							<input type="text" size="3" id="quantity" value="1" min="0" onchange="updateQuantity(this.value)" oninput="calcPrice(this.value)" style="text-align: center;">
+							<input type="button" onclick="increaseQuantity()" value="+">
+							&nbsp;&nbsp;
+							<span id="result">${content_view.pprice }</span>
+							<button onclick="resetSelection()">X</button>
+						</form>
+		        		<form action="<!-- 장바구니 및 결제 페이지로 넘겨주기  -->" method="get">
+							${content_view.pname }&nbsp;&nbsp;   		
+							${content_view.pcolor }&nbsp;&nbsp; 		<!-- 선택한 색상 -->
+							<span id="selectedSize3"></span>&nbsp;&nbsp;			<!-- 선택한 사이즈 -->  
+							<input type="button" onclick="decreaseQuantity()" value="-">
+							<input type="text" size="3" id="quantity" value="1" min="0" onchange="updateQuantity(this.value)" oninput="calcPrice(this.value)" style="text-align: center;">
+							<input type="button" onclick="increaseQuantity()" value="+">
+							&nbsp;&nbsp;
+							<span id="result">${content_view.pprice }</span>
+							<button onclick="resetSelection()">X</button>
+						</form>
+						
 					</div>
 					<div id="productInfoContainer"></div>
 					
