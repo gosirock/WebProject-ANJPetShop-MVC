@@ -9,15 +9,15 @@ public class o_orderDto {
 	String userid;
 	String pid;
 	int count;
-	int price;
-	Timestamp orderdate;
+	String price;
+	String orderdate;
 	
 	// Constructor
 	public o_orderDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public o_orderDto(int ordernum, String userid, String pid, int count, int price, Timestamp orderdate) {
+	public o_orderDto(int ordernum, String userid, String pid, int count, String price, String orderdate) {
 		super();
 		this.ordernum = ordernum;
 		this.userid = userid;
@@ -59,19 +59,19 @@ public class o_orderDto {
 		this.count = count;
 	}
 
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
-	public Timestamp getOrderdate() {
+	public String getOrderdate() {
 		return orderdate;
 	}
 
-	public void setOrderdate(Timestamp orderdate) {
+	public void setOrderdate(String orderdate) {
 		this.orderdate = orderdate;
 	}
 	

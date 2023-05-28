@@ -6,26 +6,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javalec.dao.o_adminDao;
+import com.javalec.dto.o_adminDto;
 import com.javalec.dto.o_orderDto;
 
-public class o_salesCommand implements ACommand {
+public class o_ordersCommand implements ACommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		o_adminDao dao = new o_adminDao();
 		
-		ArrayList<String> salesList = new ArrayList<>();
+		ArrayList<o_orderDto> dtos = dao.searchOrders();
 		
-		String daySales = dao.searchDaySales();
-		String weekSales = dao.searchWeekSales();
-		String monthSales = dao.searchMonthSales();
-		
-		salesList.add(daySales);
-		salesList.add(weekSales);
-		salesList.add(monthSales);
-		
-		request.setAttribute("salesList", salesList);
+		request.setAttribute("orders", dtos);
 
 	}
 

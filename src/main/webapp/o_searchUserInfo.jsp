@@ -10,25 +10,33 @@
 </head>
 <body style="background-color: #ECEFF1;">
     <header>
-        <ul>
-            <li><a href="o_adminMain.do">홈</a></li>
-            <li><a href="o_sales.do">매출현황</a></li>
-            <li><a href="o_inventory.do">재고관리</a></li>
-            <li><a href="o_searchUserInfo.do">회원정보 확인</a></li>
-        </ul>
-        <div class="user-info">
-            <span>${sessionScope.ADMINID }님 안녕하세요</span>&nbsp;&nbsp;
-            <ul>
-	            <li><a href="w_login.jsp">로그아웃</a></li>&nbsp;
+		${sessionScope.ADMINID}님 환영합니다.
+	    <nav>
+	        <div>
+	            <ul>
+	                <li><a href="o_adminMain.do">홈</a></li>
+	                <li><a href="o_searchSales.do">매출현황</a></li>
+	                <li><a href="o_inventory.do">상품관리</a></li>
+	                <li><a href="o_searchUserInfo.do">회원정보</a></li>
+	            </ul>
+	        </div>
+	    </nav>
+	    <div class="user-info">
+	        <ul>
 	            <li><a href="o_adminInfo.do?adminid=${sessionScope.ADMINID}">마이페이지</a></li>
-            </ul>
-        </div>
-    </header>
+	            <li><a href="w_login.jsp">로그아웃</a></li>
+	        </ul>
+	    </div>
+	</header>
 
 	<div class="center">
-        <h1>회원 정보 검색</h1>
+		<br/><br/>
+        <h1><b>회원 정보</b></h1>
     </div>
-    <form action="o_searchUserInfo.do">
+    
+    <!-- ----real body ---- -->
+    
+    <form action="o_searchUserInfo.do" class="center">
         검색 :
         <select name="query">
             <option value="userid" selected="selected">아이디</option>
@@ -39,35 +47,41 @@
         <input type="submit" value="검색">
     </form>
     <hr>
-	<table>
-	    <thead>
-	        <tr>
-	            <th style="width: 80px; text-align: center;" >아이디</th>
-	            <th style="width: 80px; text-align: center;">이름</th>
-	            <th style="width: 120px; text-align: center;">전화번호</th>
-	            <th style="width: 200px; text-align: center;">전자우편</th>
-	            <th style="width: 350px; text-align: center;">주소</th>
-	            <th style="width: 130px; text-align: center;">가입일자</th>
-	            <th style="width: 130px; text-align: center;">탈퇴일자</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	        <c:forEach items="${userlist}" var="dto">
-	        <c:set var="count" value="${count + 1}" scope="page"/>
-	            <tr>
-	                <td>${dto.userid}</td>
-	                <td>${dto.username}</td>
-	                <td>${dto.usertel}</td>
-	                <td>${dto.useremail}</td>
-	                <td>${dto.useraddress}</td>
-	                <td>${dto.insertdate}</td>
-	                <td>${dto.deletedate}</td>
-	            </tr>
-	        </c:forEach>
-	    </tbody>
-	</table>
-	<div class="summary">
-	    총 인원은 ${count}명 입니다.
+    <br/><br/>
+    
+    <div class="center-form">
+		<table>
+		    <thead>
+		        <tr>
+		            <th style="width: 80px; text-align: center;" >아이디</th>
+		            <th style="width: 80px; text-align: center;">이름</th>
+		            <th style="width: 120px; text-align: center;">전화번호</th>
+		            <th style="width: 200px; text-align: center;">전자우편</th>
+		            <th style="width: 350px; text-align: center;">주소</th>
+		            <th style="width: 130px; text-align: center;">가입일자</th>
+		            <th style="width: 130px; text-align: center;">탈퇴일자</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <c:forEach items="${userlist}" var="dto">
+		        <c:set var="count" value="${count + 1}" scope="page"/>
+		            <tr>
+		                <td>${dto.userid}</td>
+		                <td>${dto.username}</td>
+		                <td>${dto.usertel}</td>
+		                <td>${dto.useremail}</td>
+		                <td>${dto.useraddress}</td>
+		                <td>${dto.insertdate}</td>
+		                <td>${dto.deletedate}</td>
+		            </tr>
+		        </c:forEach>
+		    </tbody>
+		    <tr>
+		    	<td>총 인원</td>
+		    	<td colspan="6" style="text-align: left;">${count}명</td>
+		    </tr>
+		</table>
 	</div>
+
 </body>
 </html>
