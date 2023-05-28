@@ -44,6 +44,10 @@
 					    <input type="text" name="content" size="30">
 					    <input type="submit" value="검색">
 					  </form>
+					  <select>
+					  	<option value="pprice">최고 금액순</option>
+					  	<option value="pprice">최저 금액순</option>
+					  </select>
 					</div>
 				
 			
