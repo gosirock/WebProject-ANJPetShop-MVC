@@ -44,15 +44,15 @@ session.setAttribute("ADMINID", adminId);
 			<table>
 				<thead>
 					<tr>
-						<th style="width: 120px; text-align: center;">일간 매출</th>
+						<th style="width: 90px; text-align: center;">일간 매출</th>
 						<td colspan="5" style="text-align: center;">${salesList[0]}원</td>
 					</tr>
 					<tr>
-						<th style="width: 120px; text-align: center;">주간 매출</th>
+						<th style="width: 90px; text-align: center;">주간 매출</th>
 						<td colspan="5" style="text-align: center;">${salesList[1]}원</td>
 					</tr>
 					<tr>
-						<th style="width: 120px; text-align: center;">월간 매출</th>
+						<th style="width: 90px; text-align: center;">월간 매출</th>
 						<td colspan="5" style="text-align: center;">${salesList[2]}원</td>
 					</tr>
 					<tr>
@@ -63,7 +63,7 @@ session.setAttribute("ADMINID", adminId);
 						<th style="width: 80px; text-align: center;">사용자 ID</th>
 						<th style="width: 80px; text-align: center;">제품 번호</th>
 						<th style="width: 40px; text-align: center;">수량</th>
-						<th style="width: 120px; text-align: center;">주문 금액</th>
+						<th style="width: 100px; text-align: center;">주문 금액</th>
 						<th style="width: 150px; text-align: center;">주문 날짜</th>
 					</tr>
 				</thead>
@@ -75,7 +75,7 @@ session.setAttribute("ADMINID", adminId);
 							<td>${dto.ordernum}</td>
 							<td>${dto.userid}</td>
 							<td>${dto.pid}</td>
-							<td>${dto.count}</td>
+							<td class="center">${dto.count}</td>
 							<td>${dto.price}원</td>
 							<td>${dto.orderdate}</td>
 						</tr>

@@ -121,7 +121,7 @@
 								<option value="280">280</option>
 						</select></td>
 						<td><input type="text" name="pcolor" style="width: 60px;"></td>
-						<td><input type="number" min="0" name="pprice" style="width: 80px;"> 원</td>
+						<td><input type="number" min="0" name="pprice" step="1000" style="width: 80px;"> 원</td>
 						<td><input type="number" min="0" name="pstock" step="5" value="10" style="width: 40px;"> 개</td>
 						<td><input type="text" name="pimage" style="width: 180px;"></td>
 					</tr>
