@@ -152,6 +152,36 @@ public class J_dao {
 		return dtos;
 		
 	}
+	
+	
+public void insertcart(String uid, String pid, String qty) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into cart (count, userid, pid) values(?,?,?)";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, qty);
+			preparedStatement.setString(2, uid);
+			preparedStatement.setString(3, pid);
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	}
+	
+	
+	
 
 	
 
