@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.javalec.dao.J_dao;
 import com.javalec.dto.J_dto;
 
-public class j_productViewCommand implements ACommand {
+public class J_productViewCommand implements ACommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.javalec.dao.J_dao;
 import com.javalec.dto.J_dto;
 
-public class j_selectColorCommand implements ACommand {
+public class J_selectSizeCommand implements ACommand{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
