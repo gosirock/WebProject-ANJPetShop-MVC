@@ -9,11 +9,11 @@
 <title>주문/결제</title>
 </head>
 <style>
-     	/* h1 {
+     	h1 {
             position: absolute;
-            top: 100px;
-            left: 100px;
-        } */
+            
+            left: 150px;
+        }
         .pid {
             font-family: Arial, 맑은고딕; /* 원하는 글꼴로 변경 */
             font-size: 17px; /* 원하는 글꼴 크기로 변경 */
@@ -159,7 +159,8 @@
 	  }
     
   </script>
-  
+  <meta charset="UTF-8">
+  <title>주문/결제</title>
 <body>
 <header>
     <nav>
@@ -170,9 +171,10 @@
       </ul>
     </nav>
   </header>
-	<h1 style="position: absolute; top: 100px; left: 160px;">주문/결제</h1><br><br><br>
+ 
+	<h1 style=" left: 160px;">주문/결제</h1><br><br>
 	<!-- 카테고리명 테이블 -->
-	<hr width="80%" color="black" size="2">
+	<hr width="80%" color="black" size="2"><br>
   <table border="0" style="height: 20px; border-top: 1px solid black;">
     <tr>
       <th style="width: 600px;">상품정보</th>
@@ -183,8 +185,7 @@
 <!-- 상품정보 테이블 -->
 
 <head>
-  <meta charset="UTF-8">
-  <title>주문/결제</title>
+  
 </head>
 <body>
   <form id="orderForm" method="post">
@@ -221,17 +222,10 @@
       </tr>
     </table><br>
     
-    <button type="button" class="submit-button" style="display: block; position: absolute; right: 305px; width: 120px; height: 30px; background-color: black; color: white; " onclick="confirmPurchase()">주문하기</button>
-
-  </form>
-
-<!-- 총 주문금액 -->
-<!-- 결제하기 -->
-<h1 style="position: absolute; top: 600; left: 150px;">배송지 정보 입력</h1><br><br>
-<hr width="80%" color="black" size="2"><br>
-<!-- 주문자 정보 -->
 <!-- 배송지 정보 -->
 <form>
+<h1 style="position: absolute; top: 600; left: 160px;">배송지 정보 입력</h1><br><br>
+<hr width="80%" color="black" size="2"><br>
   <input type="checkbox" name="checkbox" style="position: absolute; right: 300px;" onchange="fillUserInfo(this)">
   <label for="checkbox" style="position: absolute; right: 160px;">사용자 정보와 동일</label>
   <br>
@@ -255,13 +249,14 @@
   </table>
   <br><br>
 </form>
-/* table tr:first-child {
-		  border-top: 1px solid black;
-		} */
-		
-		table tr:last-child {
-		  border-bottom: 1px solid black;
-		}
+    <button type="button" class="submit-button" style="display: block; margin: 0 auto; right: 305px; width: 120px; height: 30px; background-color: black; color: white; " onclick="confirmPurchase()">주문하기</button>
+	<br><br><br>
+  </form>
+
+<!-- 총 주문금액 -->
+<!-- 결제하기 -->
+<!-- 주문자 정보 -->
+
 </body>
 </html>
 
