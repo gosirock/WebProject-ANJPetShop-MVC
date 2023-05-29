@@ -1,50 +1,34 @@
 package com.javalec.dto;
 
-public class A_dto {
+public class o_productDto {
 
-	// field
+	// Field
 	String pid;
 	String pname;
 	int psize;
 	String pcolor;
 	int pprice;
+	int pstock;
 	String pimage;
-
-	// 생성자
-
-	public A_dto(String pid, String pname, int pprice) {
-		this.pid = pid;
-		this.pname = pname;
-		this.pprice = pprice;
-	}
-
-
-	public A_dto(String pname, int pprice) {
-		super();
-		this.pname = pname;
-		this.pprice = pprice;
-	}
-
-
-	public A_dto(String pid, String pname, int pprice, String pimage) {
-		super();
-		this.pid = pid;
-		this.pname = pname;
-		this.pprice = pprice;
-		this.pimage = pimage;
-	}
-
-
-
-
-	public String getPimage() {
-		return pimage;
-	}
 	
-	public void setPimage(String pimage) {
+	// Constructor
+	public o_productDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public o_productDto(String pid, String pname, int psize, String pcolor, int pprice, int pstock, String pimage) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.psize = psize;
+		this.pcolor = pcolor;
+		this.pprice = pprice;
+		this.pstock = pstock;
 		this.pimage = pimage;
 	}
 
+	// getter and setter
+	
 	public String getPid() {
 		return pid;
 	}
@@ -85,4 +69,20 @@ public class A_dto {
 		this.pprice = pprice;
 	}
 
+	public int getPstock() {
+		return pstock;
+	}
+
+	public void setPstock(int pstock) {
+		this.pstock = pstock;
+	}
+
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
+	
 }

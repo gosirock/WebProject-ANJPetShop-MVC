@@ -1,33 +1,114 @@
 @charset "UTF-8";
 
-
-
 header {
-  background-color: #f2f2f2;
-  padding: 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #ffffff;
+	padding: 10px;
+	margin-left: 15px;
+	z-index: 10;
+}
+
+.height_fix {
+    margin-top: -70px;
+    padding-top: 70px;
+}
+
+.fixed-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
 }
 
 h1 {
-  color: #333;
-  font-size: 24px;
+	
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	
+}
+
+.centered-input {
+    display: flex;
+    justify-content: center;
+}
+
+.centered-input input[type="submit"] {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+h3 {
+	display: flex;
+	justify-content: center;
 }
 
 nav ul {
-  list-style: none;
-  margin-right: 60px;
-  padding: 0;
-  display: flex; /* display를 flex로 설정 */
-  justify-content: center;
+	list-style: none;
+	margin-right: 60px;
+	padding: 30;
+	display: flex; /* display를 flex로 설정 */
+	justify-content: left;
+	font-size: 20px;
+	text-align: left;
+	margin-left: 15px;
 }
 
 nav li {
-  display: inline;
-  margin-right: 60px;
-  display: flex; /* display를 flex로 설정 */
-  justify-content: center;
+	display: inline;
+	margin-right: 30px;
+	display: flex; /* display를 flex로 설정 */
+	justify-content: left;
+	font-size: 20px;
+	margin-left: 15px;
 }
 
 nav li a {
-  text-decoration: none;
-  color: #333;
+	text-decoration: none;
+	text-align: left;
+	color: #000000;
+	font-size: 20px; /* 원하는 글씨 크기로 조정하세요 */
+}
+nav li input [type="button"] {
+	text-align: right;
+	text-decoration: none;
+	color: #000000;
+	font-size: 20px; /* 원하는 글씨 크기로 조정하세요 */
+}
+
+img {
+	/* min-width: 300px; */
+	max-width: 90%;
+	height: 85%;
+	object-fit: cover;
+	padding: 30px;
+	display: block;
+	margin: 0 auto;
+}
+
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 3열 그리드 */
+	gap: 10px; /* 요소 사이 간격 */
+}
+
+.product-item {
+	text-align: center;
+}
+
+.product-item img {
+	width: 50%;
+	height: auto;
+}
+
+.product-item h3 {
+	margin-top: 10px;
+}
+
+.product-item p {
+	margin-top: 5px;
 }

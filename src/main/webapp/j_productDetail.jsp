@@ -1,105 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>헤더 예시</title>
-  <style>
-    /* 구간별 스타일링 */
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      flex-grow: 1;
-    }
-
-    .categories {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .category {
-      margin: 0 10px;
-      justify-content: center;
-      flex-grow: 1;
-    }
-
-    .login-logout {
-      margin-left: 10px;
-    }
-    
-    /* main {
-      padding: 20px;
-    } */
-    
-     footer {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-    }
-     
-     .product-container {
-      display: flex;
-    }
-
-    .product-image {
-      flex-basis: 45%;
-      padding: 20px;
-    }
-
-    .product-details {
-      flex-basis: 55%;
-      padding: 20px;
-    }
-
-    .product-details h2 {
-      margin-top: 0;
-    }
-    
-  </style>
+	<meta charset="UTF-8">
+	<title>BTY SHOE MARKET</title>
+	<link rel="stylesheet" type="text/css" href="j_productDetailCss.css">
+	
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="로고">
-    </div>
+<%
+	/* 제품 페이지에서 사용자가 선택한 제품의 제품번호 받아오기 */
+	String pid = request.getParameter("pid");
+	session.setAttribute("PRODUCTID", pid);
+%>
+	<header class="header">
+		로고 카테고리 로그인 마이페이지 
+	</header>
+  
+    <main class="main">				<!-- 메인 컨텐츠 - 좌 : 이미지 / 우 : 제품 상세 설명 -->
+    	<div class="left-column">			<!-- 왼쪽 칼럼 : 제품 이미지  -->
+	        <img src="${content_view.pimage }" alt="제품 이미지를 준비중입니다." style="width: 100%; height: auto;">
+    	</div>
+    	<div class="right-column">			<!-- 오른쪽 칼럼 : 제품 상세 설명 -->
+    		<h1>${content_view.pname }제품이름</h1>	
+    		<fmt:formatNumber value="${content_view.pprice }" pattern="#,###" /> 원 <br/><br/>
+    		색상 <br/>
+        	${content_view.pcolor }
+        	<br/><br/>
+        	사이즈 <br/>
+       		${content_view.psize }&nbsp;&nbsp;
+        	<br/><br/>
+        	수량 &nbsp;&nbsp;
+			<input type="button" onclick="clickMinus()" value="-">&nbsp;
+			<input type="text" size="3" id="quantity" value="1" min="0" onchange="updateQuantity(this.value)" oninput="calcPrice(this.value)" style="text-align: center;">&nbsp;
+			<input type="button" onclick="clickPlus()" value="+">&nbsp;&nbsp;
+			<button onclick="resetSelection()">X</button>
+        	<hr>
+        	<br/>
+        	
+        	<!-- 사용자가 선택한 화면 보여주기 -->
+        	<div class="selectedPOptions">
+	        	<form action="<!-- 장바구니 및 결제 페이지로 넘겨주기  -->" method="get">
+	        		선택하신 수량과 총 결제 예정 금액을 확인하세요. <br/>
+					${content_view.pname }&nbsp;&nbsp;   		
+					${content_view.pcolor }&nbsp;&nbsp; 		<!-- 선택한 색상 -->
+					${content_view.psize }<br/>		<!-- 선택한 사이즈 -->  
+					<h3 style="text-align: right;">TOTAL </h3>
+					<h3 style="text-align: right;"> <span id="result">${content_view.pprice }</span></h3>
+					
+				</form>
+			</div>
+        	<br/><hr><br/>
+       		
+       		<!--  -->
+        	<form action="<!-- /cart.do -->" method="get">
+				<input type="submit" value="장바구니"> 
+			</form>
+			<form action="<!-- 태영이 바로구매 페이지? -->" method="get">
+				<input type="submit" value="바로구매"> 
+			</form>
+       	
+    	</div>
+    </main>
+    
+    <footer class="footer">
+    오시는길 주소 등등등
+    </footer>
 
-    <div class="categories">
-      <div class="category">카테고리 1</div>
-      <div class="category">카테고리 2</div>
-      <div class="category">카테고리 3</div>
-      <div class="category">카테고리 4</div>
-    </div>
-
-    <div class="login-logout">
-      <button>로그인</button>
-    </div>
-  </header>
-  <!-- <main> 페이지 가장 중앙 -제품 상세 내용
-  <div class="product-container">
-    <div class="product-image">
-      <img src="product-image.jpg" alt="제품 이미지">
-    </div>
-    <div class="product-details">
-      <h2>제품 상세 정보</h2>
-      <p>제품 설명이나 추가 정보를 여기에 작성합니다.</p>
-      <p>기타 상세 정보들도 여기에 포함됩니다.</p>
-    </div>
-  </div>
-</main> -->
-
-
-
-  <footer>
-    <p>저작권 정보 및 연락처</p>
-  </footer>
 </body>
+<script type="text/javascript" src="j_productDetail.js"></script>
 </html>

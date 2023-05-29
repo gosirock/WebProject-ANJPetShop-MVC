@@ -123,8 +123,35 @@ public class W_Dao {
 	
 		return result;
 	}
-
-
+	
+	public void userUpdate(String id, String pw, String name, String tel, String email, String address) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into user (userid, userpasswd, username, usertel, useremail, useraddress, insertdate) values(?,?,?,?,?,?,now())";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, id);
+			preparedStatement.setString(2, pw);
+			preparedStatement.setString(3, name);
+			preparedStatement.setString(4, tel);
+			preparedStatement.setString(5, email);
+			preparedStatement.setString(6, address);
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+	}
 
 }//end	
 		
