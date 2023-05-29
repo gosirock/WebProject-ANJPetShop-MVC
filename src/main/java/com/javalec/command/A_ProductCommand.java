@@ -12,20 +12,17 @@ public class A_ProductCommand implements ACommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	    String queryName = request.getParameter("query");
+	    String queryContent = request.getParameter("content");
+	    String sortOrder = request.getParameter("sortOrder"); // 추가: 가격순 정렬을 위한 파라미터
 
-		
-		//	상품 페이지 데이터베이스 연결 (Command)
-		String queryName = request.getParameter("query");
-		String queryContent = request.getParameter("content");
-		
-		
-		
-		A_dao dao = new A_dao();
-		ArrayList<A_dto> dtos = dao.A_ProductView(queryName, queryContent);
-		request.setAttribute("A_ProductView", dtos);
-		
+	    A_dao dao = new A_dao();
+	    ArrayList<A_dto> dtos = dao.A_ProductView(queryName, queryContent, sortOrder); // 수정: sortOrder 전달
+	    request.setAttribute("A_ProductView", dtos);
 
+	    
+	    
+	    
 		System.out.println("여기까지는 오고있긴 하냐? 여기네 여기서 못받네;");
 	}
 

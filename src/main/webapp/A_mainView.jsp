@@ -9,8 +9,7 @@
 <link rel="stylesheet" href="MyCss.css">
 </head>
 <body>
-		<!--사이트 헤더  -->
-				
+		<!--사이트 헤더  -->	
 				<header>
 					  <nav>
 					    <ul>
@@ -19,7 +18,7 @@
 					      <li><a href="#">introduction</a></li>
 					      <li><a href="#">My Page</a></li>
 					      <li><a href="#">cart</a></li>
-					      <li><input type="button" value="Logout"></li>					
+					      <li><input type="button" value="Logout"style= "text-align: right" ></li>				
 					    </ul>
 					  </nav>
 				</header>
@@ -31,12 +30,14 @@
 				   <a href="A_ProductView.do"><img src="image_02.png" alt="My Image"></a><br/><br/>
 				  		<h1>어제보다 나은 오늘을 위한</h1><br/>
 				  		<h1>collection</h1>
-				  <a href="A_ProductView.do"><img src="image_01.png" alt="My Image"></a><br/> 
+				   <a href="A_ProductView.do"><img src="image_01.png" alt="My Image"></a><br/> 
 			
 			
 				
-				<h1>shop collection</h1>	
-		
+				 	<div class="centered-input">
+   						 <input type="submit" value="Shop Main collection">
+					</div>
+
 		<!-- 메인화면 2번 -->		
 			  <div class="product-grid">
 			    <c:forEach items="${A_mainView}" var="dto">
