@@ -17,7 +17,7 @@ session.setAttribute("ADMINID", adminId);
 		<nav>
 			<div>
 				<ul>
-					<li><a href="o_adminMain.do">홈</a></li>
+					<li><a href="o_adminMain.do?adminid=${sessionScope.ADMINID}">홈</a></li>
 					<li><a href="o_inventory.do">상품관리</a></li>
 					<li><a href="o_searchUserInfo.do">회원정보</a></li>
 				</ul>

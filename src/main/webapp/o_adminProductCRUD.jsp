@@ -15,7 +15,7 @@
 		<nav>
 			<div>
 				<ul>
-					<li><a href="o_adminMain.do">홈</a></li>
+					<li><a href="o_adminMain.do?adminid=${sessionScope.ADMINID}">홈</a></li>
 					<li><a href="o_inventory.do">상품관리</a></li>
 					<li><a href="o_searchUserInfo.do">회원정보</a></li>
 				</ul>
@@ -65,8 +65,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${productList}" var="dto">
-					<form action="o_productChange.do" method="post" name="productinfo">
+				<form action="o_productChange.do" method="post" name="productinfo">
+					<c:forEach items="${productList}" var="dto">
 						<input type="hidden" name="pid" value="${dto.pid}">
 						<tr>
 							<td>${dto.pid}</td>
@@ -78,8 +78,8 @@
 							<td><input type="text" name="pimage" value="${dto.pimage}" style="width: 180px;"></td>
 							<td><input type="button" value="수정" onclick="updateCheck()"></td>
 						</tr>
-					</form>
-				</c:forEach>
+					</c:forEach>
+				</form>
 			</tbody>
 		</table>
 	</div>
@@ -103,9 +103,10 @@
 						<th style="width: 80px; text-align: center;">제품 이름</th>
 						<th style="width: 50px; text-align: center;">사이즈</th>
 						<th style="width: 80px; text-align: center;">색상</th>
-						<th style="width: 100px; text-align: center;">가격</th>
-						<th style="width: 70px; text-align: center;">재고</th>
-						<th style="width: 180px; text-align: center;">이미지 링크 주소</th>
+						<th style="width: 130px; text-align: center;">가격</th>
+						<th style="width: 90px; text-align: center;">재고</th>
+						<th style="width: 200px; text-align: center;">이미지 링크 주소</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -121,14 +122,13 @@
 								<option value="280">280</option>
 						</select></td>
 						<td><input type="text" name="pcolor" style="width: 60px;"></td>
-						<td><input type="number" min="0" name="pprice" step="1000" style="width: 80px;"> 원</td>
+						<td><input type="number" min="0" name="pprice" value="0" step="1000" style="width: 80px;"> 원</td>
 						<td><input type="number" min="0" name="pstock" step="5" value="10" style="width: 40px;"> 개</td>
 						<td><input type="text" name="pimage" style="width: 180px;"></td>
+						<td><input type="button" value="추가" onclick="insertCheck()"></td>
 					</tr>
-					<tr>
-					<td><input type="button" value="추가" onclick="insertCheck()"></td>
 					</tr>
-					
+
 				</tbody>
 			</table>
 		</form>

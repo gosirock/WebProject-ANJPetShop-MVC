@@ -13,10 +13,11 @@ public class o_stockChanageCommand implements ACommand {
 		o_adminDao dao = new o_adminDao();
 		
 		String pid = request.getParameter("pid");
+		
 		int pprice = Integer.parseInt(request.getParameter("pprice"));
 		int pstock = Integer.parseInt(request.getParameter("pstock"));
 		String pimage = request.getParameter("pimage");
-		
+				
 		dao.stockChange(pid, pprice, pstock, pimage);
 
 
