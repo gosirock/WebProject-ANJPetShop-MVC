@@ -33,10 +33,11 @@ public class o_adminDao {
 		}
 	}
 	
+	// 비밀번호를 제외한 유저의 모든 정보 저장
 	public ArrayList<o_userDto> searchUserInfo(String queryName, String queryContent){
 		ArrayList<o_userDto> dtos = new ArrayList<>();
 
-		if(queryName == null){ // 첫 화면인 경우
+		if(queryName == null){ // 화면이 처음 열릴 때
 			queryName = "username";
 			queryContent = "";
 		}
@@ -81,6 +82,7 @@ public class o_adminDao {
 		
 	} // SearchUserInfo
 	
+	// 현재 로그인한 관리자의 정보 불러옴
 	public o_adminDto searchAdminInfo(String adminid){
 		o_adminDto dto = null;
 
@@ -119,6 +121,7 @@ public class o_adminDao {
 		
 	} // searchAdminInfo
 	
+	// 주문 테이블의 정보를 날짜를 기준으로 현재날짜부터 들고온다.
 	public ArrayList<o_orderDto> searchOrders(){
 		ArrayList<o_orderDto> dtos = new ArrayList<>();
 
@@ -130,7 +133,7 @@ public class o_adminDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "select * from orders";
+			String query = "select * from orders order by orderdate desc";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			
