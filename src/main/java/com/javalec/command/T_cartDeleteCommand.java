@@ -7,10 +7,16 @@ import com.javalec.dao.T_Dao;
 
 public class T_cartDeleteCommand implements ACommand {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		T_Dao dao = new T_Dao();
-		dao.delete(seq);
+	    @Override
+	    public void execute(HttpServletRequest request, HttpServletResponse response) {
+	    	String seqParam = request.getParameter("seq");
+	    	int seq = 0; // 기본값 설정
+	    	if (seqParam != null && !seqParam.isEmpty()) {
+	    	    seq = Integer.parseInt(seqParam);
+	    	}
+	    	System.out.println(seq);
+	        T_Dao dao = new T_Dao();
+	        dao.delete(seq);
+	    }
 	}
-}
+

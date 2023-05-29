@@ -19,8 +19,9 @@ public class T_productDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public T_productDto(String pid, String pname, int psize, String pcolor, int pprice, int count) {
+	public T_productDto(String pimage, String pid, String pname, int psize, String pcolor, int pprice, int count) {
 		super();
+		this.pimage = pimage;
 		this.pid = pid;
 		this.pname = pname;
 		this.psize = psize;
@@ -28,7 +29,6 @@ public class T_productDto {
 		this.pprice = pprice;
 		this.count = count;
 //		this.pstock = pstock;
-//		this.pimage = pimage;
 	}
 	
 	public T_productDto(int seq) {

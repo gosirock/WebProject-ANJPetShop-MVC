@@ -11,7 +11,7 @@
      	h1 {
             position: absolute;
             top: 100px;
-            left: 100px;
+            left: 160px;
         }
         .pid {
             font-family: Arial, 맑은고딕; /* 원하는 글꼴로 변경 */
@@ -21,7 +21,7 @@
         }
          table {
             margin: 0 auto; /* 가운데 정렬 */
-            width: 50%; /* 테이블 크기 조정 */
+            width: 60%; /* 테이블 크기 조정 */
             height: 100px; /* 테이블 높이 조정 */
         }
         /* .submit-button {
@@ -76,17 +76,21 @@
       form.submit();
     }
 
-    // 총 주문금액 계산하기
+ // 체크박스 체크 여부에 따라 총 주문금액 계산
     function calculateTotalAmount() {
       var totalAmount = 0;
       var totalPriceElements = document.querySelectorAll("[id^='totalPrice_']");
+      var checkboxes = document.getElementsByName('check'); // 체크박스 요소 가져오기
 
-      totalPriceElements.forEach(function(element) {
+      totalPriceElements.forEach(function(element, index) {
         var priceText = element.textContent.replace(/[^0-9]/g, "");
         var price = parseInt(priceText);
+        var checkbox = checkboxes[index]; // 해당 인덱스의 체크박스 가져오기
 
-        if (!isNaN(price)) {
-          totalAmount += price;
+        if (checkbox.checked) { // 체크박스가 체크된 경우에만 계산
+          if (!isNaN(price)) {
+            totalAmount += price;
+          }
         }
       });
 
@@ -94,7 +98,7 @@
       totalAmountElement.textContent = numberWithCommas(totalAmount);
     }
 
-    // 페이지 로드 시 총 주문금액 초기화
+ // 페이지 로드 시 총 주문금액 초기화
     window.addEventListener("load", calculateTotalAmount);
 
     // 변경 여부 확인 후 폼 제출
@@ -145,6 +149,41 @@
       document.body.appendChild(form);
       form.submit();
     }
+    
+ // 주문하기 버튼 클릭 시 선택된 상품들의 폼을 제출
+    function submitSelectedItems() {
+      var checkboxes = document.getElementsByName('check');
+      var selectedItems = [];
+
+      // 선택된 체크박스의 값을 배열에 추가
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          var formId = checkboxes[i].parentNode.parentNode.parentNode.parentNode.id;
+          var pid = formId.substring(formId.indexOf('_') + 1);
+          selectedItems.push(pid);
+        }
+      }
+
+      // 선택된 항목이 있을 경우 폼 제출
+      if (selectedItems.length > 0) {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'purchase.do';
+
+        // 선택된 상품들의 pid 값을 폼에 추가
+        for (var j = 0; j < selectedItems.length; j++) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'pid';
+          input.value = selectedItems[j];
+          form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+    }
+    
   </script>
 </head>
 <body>
@@ -162,8 +201,8 @@
   <hr width="80%" color="black" size="2">
   <table border="0" style="height: 20px;">
     <tr>
-      <th style="width: 120px;"></th>
-      <th style="width: 180px;">상품정보</th>
+      <th colspan="3"></th>
+      <th>상품정보</th>
       <th style="width: 130px;">수량</th>
       <th style="width: 100px;">주문금액</th>
     </tr>
@@ -172,16 +211,17 @@
     <form id="form_${dto.pid}" action="T_cart.do?pid=${dto.pid}" method="get">
       <table border="0">
         <tr>
-          <td><input type="checkbox" name="check"> </td>
-          <td style="width: 120px;">이미지</td>
-          <td style="width: 180px; text-align: left;">
+      
+          <td colspan="2" style="width: 10px;"><input type="checkbox" name="check" checked="checked" onchange="calculateTotalAmount()"></td>
+          <td><img alt="arter" src="${dto.pimage}"></td>
+          <td style="width: 300px; text-align: left;">
             <span class="pid">${dto.pid}</span><br>
-            ${dto.pname}<br>
+          <fmt:formatNumber value="${dto.pprice}" pattern="#,##0"/>원<br>
             ${dto.pcolor}<br>
           </td>
           <td style="width: 130px;">
             <select name="count_${dto.pid}" data-original-count="${dto.count}" data-price="${dto.pprice}" onchange="calculateTotalPrice(this, 'totalPrice_${dto.pid}')">
-              <c:forEach begin="1" end="10" var="i">
+              <c:forEach begin="0" end="10" var="i">
                 <option value="${i}" ${i eq dto.count ? 'selected' : ''}>${i}</option>
               </c:forEach>
             </select>&nbsp;
@@ -207,8 +247,8 @@
             <fmt:formatNumber value="${totalAmount}" pattern="#,##0"/>
           </span>원
         </td>
-        <td><input type="button" value="삭제" onclick="deleteSelectedItems()"></td>
-        <td style="text-align: right;"><input type="submit" value="주문하기" class="submit-button"></td>
+        <td style="text-align: right;"><input type="button" value="   삭제    " style="width: 120px; height: 30px; background-color: black; color: white;" onclick="deleteSelectedItems()"><br>
+        <input type="submit" value="주문하기" style="width: 120px; height: 30px; background-color: black; color: white;" class="submit-button"></td>
       </tr>
     </table>
   </form>
